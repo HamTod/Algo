@@ -56,11 +56,12 @@ public class backtracking
 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in); 
-       //int set[] = {10, 7, 5, 18, 12, 20, 15};
+       //int set[] = {5,10,12,13,15,18};
        int count = sc.nextInt();
+       
        int set[] = new int[5];
        for(int i=0;i<count;i++){
-           
+          set[i] = sc.nextInt();
        }
        int size = 30;
     

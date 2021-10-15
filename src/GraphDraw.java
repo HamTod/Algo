@@ -33,6 +33,7 @@ import javax.swing.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.Stack;
 import javax.swing.AbstractAction;
 import static javax.swing.Action.ACTION_COMMAND_KEY;
 import javax.swing.ActionMap;
@@ -228,6 +229,8 @@ public class GraphDraw extends javax.swing.JFrame {
 
         jFileChooserOpen = new javax.swing.JFileChooser();
         jFileChooserSaveAs = new javax.swing.JFileChooser();
+        jDialogSolution = new javax.swing.JDialog();
+        jPanelSolution = new javax.swing.JPanel();
         canvas = new javax.swing.JPanel();
         manu = new javax.swing.JPanel();
         jLabelSet = new javax.swing.JLabel();
@@ -252,6 +255,35 @@ public class GraphDraw extends javax.swing.JFrame {
         jFileChooserSaveAs.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
         jFileChooserSaveAs.setApproveButtonToolTipText("");
         jFileChooserSaveAs.setCurrentDirectory(new java.io.File("F:\\learn\\64-1\\Algo\\homework\\Subset Sum\\TestSS"));
+
+        jPanelSolution.setBackground(new java.awt.Color(153, 255, 255));
+        jPanelSolution.setToolTipText("");
+
+        javax.swing.GroupLayout jPanelSolutionLayout = new javax.swing.GroupLayout(jPanelSolution);
+        jPanelSolution.setLayout(jPanelSolutionLayout);
+        jPanelSolutionLayout.setHorizontalGroup(
+            jPanelSolutionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 978, Short.MAX_VALUE)
+        );
+        jPanelSolutionLayout.setVerticalGroup(
+            jPanelSolutionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 621, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jDialogSolutionLayout = new javax.swing.GroupLayout(jDialogSolution.getContentPane());
+        jDialogSolution.getContentPane().setLayout(jDialogSolutionLayout);
+        jDialogSolutionLayout.setHorizontalGroup(
+            jDialogSolutionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogSolutionLayout.createSequentialGroup()
+                .addComponent(jPanelSolution, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jDialogSolutionLayout.setVerticalGroup(
+            jDialogSolutionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogSolutionLayout.createSequentialGroup()
+                .addComponent(jPanelSolution, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Supset Sum");
@@ -806,8 +838,12 @@ public class GraphDraw extends javax.swing.JFrame {
         }
         String tergetStr = jTextFieldTerget.getText();
         int tergetInt = Integer.parseInt(tergetStr);
-        SubSet bk = new SubSet(setIntArr,tergetInt);
-        bk.solve(0, 0);
+        SubSet bt = new SubSet(setIntArr, tergetInt);
+        bt.solve(0, 0); 
+        JOptionPane.showMessageDialog(jDialogSolution,
+                bt.sb,
+                "Solution",
+                JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButtonBacktrackingMouseClicked
 
     /**
@@ -858,12 +894,14 @@ public class GraphDraw extends javax.swing.JFrame {
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JPanel canvas;
     private javax.swing.JButton jButtonBacktracking;
     private javax.swing.JButton jButtonBrandandBound;
     private javax.swing.JButton jButtonGenerateTree;
     private javax.swing.JButton jButtonSort;
+    private javax.swing.JDialog jDialogSolution;
     private javax.swing.JFileChooser jFileChooserOpen;
     private javax.swing.JFileChooser jFileChooserSaveAs;
     private javax.swing.JLabel jLabelSet;
@@ -875,9 +913,93 @@ public class GraphDraw extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemOpen;
     private javax.swing.JMenuItem jMenuItemSave;
     private javax.swing.JMenuItem jMenuItemSaveAs;
+    private javax.swing.JPanel jPanelSolution;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTextField jTextFieldSet;
     private javax.swing.JTextField jTextFieldTerget;
     private javax.swing.JPanel manu;
     // End of variables declaration//GEN-END:variables
+}
+
+class SubSet {
+
+    int set[];
+    int sum;
+    int k;
+
+    Stack<Integer> solutionSet;
+    Stack<Integer> solutionSetbinary;
+    StringBuilder sb = new StringBuilder();
+    boolean hasSolution;
+
+    SubSet(int set[], int sum) {
+        this.set = set;
+        this.sum = sum;
+        this.solutionSet = new Stack<>();
+        this.solutionSetbinary = new Stack<>();
+        hasSolution = false;
+    }
+
+    public Stack<Integer> getSolutionSet() {
+        return solutionSet;
+    }
+
+    public Stack<Integer> getSolutionSetbinary() {
+        return solutionSetbinary;
+    }
+
+    public void solve(int s, int idx) {
+        this.k = idx;
+        if (s > sum) {
+            return;
+        }
+
+        if (s == sum) {
+            hasSolution = true;
+
+            displaySolutionSet();
+
+            return;
+        }
+
+        for (int i = idx; i < set.length; i++) {
+
+            solutionSet.push(set[i]);
+            solutionSetbinary.push(1);
+
+            solve(s + set[i], i + 1);
+
+            for (int j = i; j < k; j++) {
+                solutionSetbinary.pop();
+            }
+            solutionSetbinary.push(0);
+            solutionSet.pop();
+        }
+    }
+
+    public void displaySolutionSet() {
+
+        sb.append("solutionSet : ");
+        System.out.print("solutionSet : ");
+        for (Integer item : solutionSet) {
+            sb.append(item.toString() + " ");
+            System.out.print(item + " ");
+        }
+        System.out.println();
+        sb.append("\nsolutionSetBinary : ");
+        System.out.print("solutionSetBinary : ");
+        for (int i = 0; i < set.length; i++) {
+            if (solutionSetbinary.size() > i) {
+                sb.append(solutionSetbinary.get(i).toString() + " ");
+                System.out.print(solutionSetbinary.get(i) + " ");
+            } else {
+                sb.append("0 ");
+                System.out.print("0 ");
+            }
+        }
+        sb.append("\n");
+        System.out.println();
+
+    }
+
 }

@@ -10,6 +10,7 @@ class SubSet {
 
     Stack<Integer> solutionSet;
     Stack<Integer> solutionSetbinary;
+    StringBuilder sb = new StringBuilder();
     boolean hasSolution;
 
     SubSet(int set[], int sum) {
@@ -18,6 +19,10 @@ class SubSet {
         this.solutionSet = new Stack<>();
         this.solutionSetbinary = new Stack<>();
         hasSolution = false;
+    }
+
+    public Stack<Integer> getSolutionSetbinary() {
+        return solutionSetbinary;
     }
 
     public void solve(int s, int idx) {
@@ -50,21 +55,27 @@ class SubSet {
         }
     }
 
-    private void displaySolutionSet() {
-        System.out.print("solutionSet : ");
-        for (Integer item : solutionSet) {
-            System.out.print(item + " ");
-        }
-        System.out.println();
-        System.out.print("solutionSetBinary : ");
-        for (int i = 0; i < set.length; i++) {
-            if (solutionSetbinary.size() > i) {
-                System.out.print(solutionSetbinary.get(i) + " ");
-            } else {
-                System.out.print("0 ");
+    public void displaySolutionSet() {
+        sb.append("solutionSet : ");
+            System.out.print("solutionSet : ");
+            for (Integer item : solutionSet) {
+                sb.append(item.toString()+" ");
+                System.out.print(item + " ");
             }
-        }
-        System.out.println();
+            System.out.println();
+            sb.append("\nsolutionSetBinary : ");
+            System.out.print("solutionSetBinary : ");
+            for (int i = 0; i < set.length; i++) {
+                if (solutionSetbinary.size() > i) {
+                    sb.append(solutionSetbinary.get(i).toString()+" ");
+                    System.out.print(solutionSetbinary.get(i) + " ");
+                } else {
+                    sb.append("0 ");
+                    System.out.print("0 ");
+                }
+            }
+            sb.append("\n");
+            System.out.println();
     }
 
 }

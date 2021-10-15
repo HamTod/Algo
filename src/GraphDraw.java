@@ -229,12 +229,16 @@ public class GraphDraw extends javax.swing.JFrame {
         jFileChooserOpen = new javax.swing.JFileChooser();
         jFileChooserSaveAs = new javax.swing.JFileChooser();
         canvas = new javax.swing.JPanel();
-        graphDrawJPanel = new GraphDrawJPanel();
         manu = new javax.swing.JPanel();
         jLabelSet = new javax.swing.JLabel();
         jTextFieldSet = new javax.swing.JTextField();
         jLabelSort = new javax.swing.JLabel();
         jButtonGenerateTree = new javax.swing.JButton();
+        jButtonSort = new javax.swing.JButton();
+        jLabelTerget = new javax.swing.JLabel();
+        jTextFieldTerget = new javax.swing.JTextField();
+        jButtonBacktracking = new javax.swing.JButton();
+        jButtonBrandandBound = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemOpen = new javax.swing.JMenuItem();
@@ -293,36 +297,22 @@ public class GraphDraw extends javax.swing.JFrame {
             }
         });
 
-        graphDrawJPanel.setBackground(new java.awt.Color(204, 255, 255));
-        graphDrawJPanel.setPreferredSize(new java.awt.Dimension(800, 680));
-
-        javax.swing.GroupLayout graphDrawJPanelLayout = new javax.swing.GroupLayout(graphDrawJPanel);
-        graphDrawJPanel.setLayout(graphDrawJPanelLayout);
-        graphDrawJPanelLayout.setHorizontalGroup(
-            graphDrawJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-        );
-        graphDrawJPanelLayout.setVerticalGroup(
-            graphDrawJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout canvasLayout = new javax.swing.GroupLayout(canvas);
         canvas.setLayout(canvasLayout);
         canvasLayout.setHorizontalGroup(
             canvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(graphDrawJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
         canvasLayout.setVerticalGroup(
             canvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(graphDrawJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 680, Short.MAX_VALUE)
         );
 
         manu.setBackground(new java.awt.Color(255, 204, 204));
 
         jLabelSet.setText("Set");
 
-        jTextFieldSet.setText("{1,2,3,4,5,6,7,8,9}");
+        jTextFieldSet.setText("5,10,12,13,15,18");
         jTextFieldSet.setFocusable(false);
         jTextFieldSet.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -350,6 +340,21 @@ public class GraphDraw extends javax.swing.JFrame {
             }
         });
 
+        jButtonSort.setText("Sort");
+
+        jLabelTerget.setText("Terget");
+
+        jTextFieldTerget.setText("30");
+
+        jButtonBacktracking.setText("Backtracking");
+        jButtonBacktracking.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonBacktrackingMouseClicked(evt);
+            }
+        });
+
+        jButtonBrandandBound.setText("brand and bound");
+
         javax.swing.GroupLayout manuLayout = new javax.swing.GroupLayout(manu);
         manu.setLayout(manuLayout);
         manuLayout.setHorizontalGroup(
@@ -357,13 +362,20 @@ public class GraphDraw extends javax.swing.JFrame {
             .addGroup(manuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(manuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldSet, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(jTextFieldSet)
                     .addComponent(jButtonGenerateTree, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonSort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextFieldTerget)
                     .addGroup(manuLayout.createSequentialGroup()
                         .addGroup(manuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelSet)
-                            .addComponent(jLabelSort))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jLabelSort)
+                            .addComponent(jLabelTerget))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(manuLayout.createSequentialGroup()
+                        .addComponent(jButtonBacktracking)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonBrandandBound)))
                 .addContainerGap())
         );
         manuLayout.setVerticalGroup(
@@ -377,6 +389,16 @@ public class GraphDraw extends javax.swing.JFrame {
                 .addComponent(jButtonGenerateTree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelSort)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonSort)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelTerget)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldTerget, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(manuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonBacktracking)
+                    .addComponent(jButtonBrandandBound))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -577,35 +599,35 @@ public class GraphDraw extends javax.swing.JFrame {
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
-        /*if ((int) evt.getKeyChar() == 32) {
+        if ((int) evt.getKeyChar() == 32) {
             //press space bar
             mode = "Edge_";
-        }*/
+        }
     }//GEN-LAST:event_formKeyPressed
 
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
         // TODO add your handling code here:
-        // mode = "Vertex";
+        mode = "Vertex";
     }//GEN-LAST:event_formKeyReleased
 
     private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
         // TODO add your handling code here:
         //System.out.println("key " + evt.getKeyChar() + " = " + (int) evt.getKeyChar());
-/*       if ((int) evt.getKeyChar() == 19) {
+        if ((int) evt.getKeyChar() == 19) {
             /*try {
                 //ctrl + S
                 save("backup.json");
             } catch (IOException ex) {
 
             }*/
-/*        } else if ((int) evt.getKeyChar() == 15) {
+        } else if ((int) evt.getKeyChar() == 15) {
             /*try {
                 //ctrl + O 
                 open("backup.json");
             } catch (IOException ex) {
                 
             }*/
-/*       } else if ((int) evt.getKeyChar() == 14) {
+        } else if ((int) evt.getKeyChar() == 14) {
             //ctrl + N 
 
         } else if ((int) evt.getKeyChar() == 12) {
@@ -671,7 +693,7 @@ public class GraphDraw extends javax.swing.JFrame {
             }
 
         }
-        draw();*/
+        draw();
     }//GEN-LAST:event_formKeyTyped
 
     private void jMenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenActionPerformed
@@ -774,148 +796,19 @@ public class GraphDraw extends javax.swing.JFrame {
         jButtonGenerateTree.setFocusable(true);
     }//GEN-LAST:event_jTextFieldSetMouseEntered
 
-    class GraphDrawJPanel extends javax.swing.JPanel {
-
-        public GraphDrawJPanel() {
-            setKeyBindings();
-            initComponents();
+    private void jButtonBacktrackingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonBacktrackingMouseClicked
+        // TODO add your handling code here:
+        String setStr = jTextFieldSet.getText();
+        String[] setStrArr = setStr.split(",");
+        int[] setIntArr = new int[setStrArr.length];
+        for (int i = 0; i < setStrArr.length; i++) {
+            setIntArr[i] = Integer.parseInt(setStrArr[i]);
         }
-
-        private void setKeyBindings() {
-            ActionMap actionMap = getActionMap();
-            int condition = JComponent.WHEN_IN_FOCUSED_WINDOW;
-            InputMap inputMap = getInputMap(condition);
-
-            String vkDelete = "VK_Delete";
-            String vkSpace = "VK_Space";
-            
-            inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), vkSpace);
-            inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), vkDelete);
-
-            actionMap.put(vkSpace, new KeyAction(vkSpace));
-            actionMap.put(vkDelete, new KeyAction(vkDelete));
-        }
-
-        private class KeyAction extends AbstractAction {
-
-            public KeyAction(String actionCommand) {
-                putValue(ACTION_COMMAND_KEY, actionCommand);
-            }
-
-            @Override
-            public void actionPerformed(ActionEvent actionEvt) {
-                System.out.println(actionEvt.getActionCommand() + " pressed");
-                if (selected instanceof Vertex) {
-                    Vertex s = (Vertex) selected;
-                    // int status = (int) evt.getKeyChar();
-                    if (actionEvt.getActionCommand().equals("VK_Space")) { //delete
-                        if (s.name.length() > 1) {
-                            s.name = s.name.substring(0, s.name.length() - 1).trim();
-                        } else {
-                            s.name = "".trim();
-                        }
-                    } else if (actionEvt.getActionCommand().equals("VK_Delete")) { // space
-                        ArrayList<Edge_> TempEdge = new ArrayList<>();
-                        for (Edge_ t : Edge_s) {
-                            if (t.vertexA == selected || t.vertexB == selected) {
-                                TempEdge.add(t);
-                            }
-                        }
-                        for (Edge_ t : TempEdge) {
-                            Edge_s.remove(t);
-                        }
-                        Vertexs.remove(selected);
-                        selected = null;
-                    } else {
-                        s.name += actionEvt;
-                        s.name = s.name.trim();
-                    }
-                } else if (selected instanceof Edge_) {
-                    Edge_ t = (Edge_) selected;
-                    //int status = (int) evt.getKeyChar();
-                    if (actionEvt.getActionCommand().equals("VK_Space")) {
-                        if (t.weight.length() > 1) {
-                            t.weight = t.weight.substring(0, t.weight.length() - 1).trim();
-                        } else {
-                            t.weight = "".trim();
-                        }
-                    } else if (actionEvt.getActionCommand().equals("VK_Delete")) {
-                        Edge_s.remove(selected);
-                        selected = null;
-                    } else {
-                       /* if (evt.getKeyChar() == ' ') {
-                            return;
-                        } */
-                        t.weight += actionEvt;
-                        t.weight = t.weight.trim();
-                    }
-                }
-                draw();
-            }
-            
-            
-        }
-
-        /**
-         * This method is called from within the constructor to initialize the
-         * form. WARNING: Do NOT modify this code. The content of this method is
-         * always regenerated by the Form Editor.
-         */
-        @SuppressWarnings("unchecked")
-        // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-        private void initComponents() {
-
-            addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-                public void mouseDragged(java.awt.event.MouseEvent evt) {
-                    formMouseDragged(evt);
-                }
-            });
-            addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    formMouseClicked(evt);
-                }
-
-                public void mousePressed(java.awt.event.MouseEvent evt) {
-                    formMousePressed(evt);
-                }
-
-                public void mouseReleased(java.awt.event.MouseEvent evt) {
-                    formMouseReleased(evt);
-                }
-            });
-
-        }// </editor-fold>                        
-
-        private void formMouseClicked(java.awt.event.MouseEvent evt) {
-            // TODO add your handling code here:
-            int x = evt.getX();
-            int y = evt.getY();
-            selected(x, y);
-            if (evt.getClickCount() == 2 && !evt.isConsumed()) {
-                evt.consume();
-                if (!Vertexs.contains(selected)) {
-                    Vertex TempVertex = new Vertex(x, y);
-                    Vertexs.add(TempVertex);
-                }
-            }
-            draw();
-        }
-
-        private void formMouseDragged(java.awt.event.MouseEvent evt) {
-            // TODO add your handling code here:
-        }
-
-        private void formMousePressed(java.awt.event.MouseEvent evt) {
-            // TODO add your handling code here:
-        }
-
-        private void formMouseReleased(java.awt.event.MouseEvent evt) {
-            // TODO add your handling code here:
-        }
-
-        // Variables declaration - do not modify                     
-        // End of variables declaration                   
-    }
+        String tergetStr = jTextFieldTerget.getText();
+        int tergetInt = Integer.parseInt(tergetStr);
+        SubSet bk = new SubSet(setIntArr,tergetInt);
+        bk.solve(0, 0);
+    }//GEN-LAST:event_jButtonBacktrackingMouseClicked
 
     /**
      * @param args the command line arguments
@@ -967,12 +860,15 @@ public class GraphDraw extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JPanel canvas;
-    private GraphDrawJPanel graphDrawJPanel;
+    private javax.swing.JButton jButtonBacktracking;
+    private javax.swing.JButton jButtonBrandandBound;
     private javax.swing.JButton jButtonGenerateTree;
+    private javax.swing.JButton jButtonSort;
     private javax.swing.JFileChooser jFileChooserOpen;
     private javax.swing.JFileChooser jFileChooserSaveAs;
     private javax.swing.JLabel jLabelSet;
     private javax.swing.JLabel jLabelSort;
+    private javax.swing.JLabel jLabelTerget;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuEdit;
     private javax.swing.JMenu jMenuFile;
@@ -981,6 +877,7 @@ public class GraphDraw extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemSaveAs;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTextField jTextFieldSet;
+    private javax.swing.JTextField jTextFieldTerget;
     private javax.swing.JPanel manu;
     // End of variables declaration//GEN-END:variables
 }
